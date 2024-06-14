@@ -1,28 +1,26 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-var ctr =`0`;
+var ctr = 0;
 function App_2() {
-  const [todos, setTodos] = React.useState(
-      {
-        id: 1,
-        title: "Go to Gym",
-        completed: true
-      }
-  );
+  const [todos, setTodos] = React.useState({
+    id: 1,
+    title: "Go to Gym",
+    completed: true
+  });
 
   console.log("rendering");
+  
   // In react, rendering happens again and again
   // That's why setTimeout is occuring again and again
-  
-  if(ctr === `0`){
-    setTimeout(() => {
+  if( ctr === 0 ){
+    setInterval(() => {
       setTodos({
           id: 1,
           title: "Go to Gym at: " + Math.random()* 1000,
           completed: true
         })
-    }, 1000);
+    }, 1000)
 
     ctr = 1;
   }
@@ -33,9 +31,9 @@ function App_2() {
 
   return (
     <div>
-        {todos.title}
-        <br/>
-        {todos.completed ? "Completed": "Not Completed"}
+      {todos.title}
+      <br/>
+      {todos.completed ? "Completed": "Not Completed"}
     </div>
   )
 }

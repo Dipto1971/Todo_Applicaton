@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 function App() {
   const [todos, setTodos] = React.useState(
+    // 
     [
       {
         id: 1,
@@ -14,6 +15,11 @@ function App() {
         title: "Go to Class",
         completed: false
       },
+      {
+        id: 3,
+        title: "Go to Work",
+        completed: true
+      }
     ]
   );
   console.log(todos);
@@ -36,5 +42,23 @@ function Todo(props) {
     </div>
   )
 }
+
+// Definition of a component: A function that returns JSX (HTML in JS) 
+// JSX is a syntax extension for JavaScript recommended by React
+// Why we need Components:
+// 1. Reusability
+// 2. Maintainability
+// 3. Composability
+// 4. Readability
+// 5. Scalability
+// 6. Testability
+
+// Components can be of two types:
+// 1. Functional Components
+// 2. Class Components
+
+// Functional Components: Components that are defined as functions
+// Class Components: Components that are defined as classes
+
 
 export default App;

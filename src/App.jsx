@@ -24,14 +24,12 @@ function App() {
   );
   console.log(todos);
 
+
   return (
     <div>
       {todos.map((todo) => {
         return <Todo key={todo.id} title={todo.title} completed={todo.completed}> </Todo>
       })}
-      {
-        <Todo title = "Call Todo Component directly" completed = {true}></Todo>
-      }
       </div>
   )
 }

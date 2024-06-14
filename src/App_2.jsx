@@ -11,15 +11,13 @@ function App_2() {
   );
 
   console.log("rendering");
-  // In react, rendering happens again and again
-  // That's why setTimeout is occuring again and again   
-  setTimeout(() => {
+  // This will cause too many re renders because react will
+  // keep on calling the useEffect as it is how the useEffect works
     setTodos({
         id: 1,
         title: "Go to Gym at: " + Math.random()* 1000,
         completed: true
       })
-  }, 1000)
 
   return (
     <div>

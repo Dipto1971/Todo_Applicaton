@@ -9,9 +9,11 @@ function App_2() {
         completed: true
       }
   );
-  console.log(todos);
 
-  setInterval(() => {
+  console.log("rendering");
+  // In react, rendering happens again and again
+  // That's why setTimeout is occuring again and again   
+  setTimeout(() => {
     setTodos({
         id: 1,
         title: "Go to Gym at: " + Math.random()* 1000,

@@ -27,7 +27,13 @@ const TodoList = () => {
             body: JSON.stringify({ title, description })
         });
         const data = await response.json();
-        setTodos([...todos, data]);
+        
+        let newTodos = [];
+        for (let i = 0; i < todos.length; i++) {
+            newTodos.push(todos[i]);
+        }
+        newTodos.push(data);
+        setTodos(newTodos);
     };
 
     const markDone = async (id) => {

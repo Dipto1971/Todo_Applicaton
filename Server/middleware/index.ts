@@ -17,7 +17,7 @@ const authenticateJwt = (req, res, next) => {
   }
 };
 
-module.exports = {
+export default {
   authenticateJwt,
   SECRET,
 };

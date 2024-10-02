@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticaterJwt } from "../middleware/index";
+import { authenticateJwt } from "../middleware/index";
 import { SECRET } from "../middleware/index";
 import { Todo } from "../db";
 const router = express.Router();
@@ -49,4 +49,4 @@ router.patch("/todos/:todoId/done", authenticateJwt, (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

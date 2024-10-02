@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './routes/auth';
-import todoRoutes from './routes/todo';
-import { MONGO_URI } from './config';
+import todoRoutes from "./routes/todo";
+import  MONGO_URI  from './config';
 
 const app = express();
 const port = 3000;

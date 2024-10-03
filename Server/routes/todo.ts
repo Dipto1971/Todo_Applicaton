@@ -8,6 +8,7 @@ interface CreateTodoInput {
   description: string;
 }
 
+// Zod: Input validation library
 router.post("/todos", authenticateJwt, (req, res) => {
   const inputs: CreateTodoInput = req.body;
   const done = false;

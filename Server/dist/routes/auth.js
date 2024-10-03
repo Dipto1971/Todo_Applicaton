@@ -19,6 +19,8 @@ const middleware_2 = require("../middleware");
 const db_1 = require("../db");
 const router = express_1.default.Router();
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Here the req, res types are inferred from the express.Router() type
+    // Means we don't need to import Request and Response from express
     const { username, password } = req.body;
     const user = yield db_1.User.findOne({ username });
     if (user) {
@@ -43,7 +45,9 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 }));
 router.get("/me", middleware_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield db_1.User.findOne({ _id: req.userId });
+    const userId = req.headers["userId"];
+    // Here we are getting the userId from the headers object
+    const user = yield db_1.User.findOne({ _id: userId });
     if (user) {
         res.json({ username: user.username });
     }

@@ -6,6 +6,8 @@ import { User } from "../db";
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
+  // Here the req, res types are inferred from the express.Router() type
+  // Means we don't need to import Request and Response from express
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (user) {
@@ -30,7 +32,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", authenticateJwt, async (req, res) => {
-  const user = await User.findOne({ _id: req.userId });
+  const userId = req.headers["userId"];
+  // Here we are getting the userId from the headers object
+  const user = await User.findOne({ _id: userId });
   if (user) {
     res.json({ username: user.username });
   } else {

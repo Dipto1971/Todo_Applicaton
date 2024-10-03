@@ -8,7 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const todo_1 = __importDefault(require("./routes/todo"));
-const config_1 = __importDefault(require("./config"));
+const config_1 = require("./config");
 const app = (0, express_1.default)();
 const port = 3000;
 app.use((0, cors_1.default)());
@@ -18,4 +18,4 @@ app.use("/todo", todo_1.default);
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
-mongoose_1.default.connect(`${config_1.default}`, { dbName: "Todos" });
+mongoose_1.default.connect(`${config_1.MONGO_URI}`, { dbName: "Todos" });

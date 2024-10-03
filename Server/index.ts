@@ -1,9 +1,9 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import authRoutes from './routes/auth';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import authRoutes from "./routes/auth";
 import todoRoutes from "./routes/todo";
-import  MONGO_URI  from './config';
+import { MONGO_URI } from "./config";
 
 const app = express();
 const port = 3000;
@@ -14,7 +14,7 @@ app.use("/auth", authRoutes);
 app.use("/todo", todoRoutes);
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log(`Example app listening at http://localhost:${port}`);
+});
 
 mongoose.connect(`${MONGO_URI}`, { dbName: "Todos" });

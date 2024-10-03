@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const index_1 = require("../middleware/index");
 const db_1 = require("../db");
 const router = express_1.default.Router();
+// Zod: Input validation library
 router.post("/todos", index_1.authenticateJwt, (req, res) => {
     const inputs = req.body;
     const done = false;

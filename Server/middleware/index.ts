@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-const SECRET = "SECr3t";
+export const SECRET = "SECr3t";
 
-const authenticateJwt = (req, res, next) => {
+export const authenticateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
@@ -15,9 +15,4 @@ const authenticateJwt = (req, res, next) => {
   } else {
     res.sendStatus(401);
   }
-};
-
-export default {
-  authenticateJwt,
-  SECRET,
 };

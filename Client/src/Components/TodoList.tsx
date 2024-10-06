@@ -7,6 +7,7 @@ interface Todo {
   title: string;
   description: string;
   done: boolean;
+  userId: string;
 }
 type TodoArray = Todo[];
 

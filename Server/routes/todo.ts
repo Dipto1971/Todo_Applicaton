@@ -13,7 +13,12 @@ router.post("/todos", authenticateJwt, (req, res) => {
   const inputs: CreateTodoInput = req.body;
   const done = false;
   const userId = req.headers["userId"];
-  const newTodo = new Todo({ title: inputs.title, description: inputs.description, done, userId });
+  const newTodo = new Todo({
+    title: inputs.title,
+    description: inputs.description,
+    done,
+    userId,
+  });
 
   newTodo
     .save()

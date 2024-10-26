@@ -19,19 +19,19 @@ const middleware_2 = require("../middleware");
 const db_1 = require("../db");
 const router = express_1.default.Router();
 const zod_1 = require("zod");
-let SignupInputProps = zod_1.z.object({
-    username: zod_1.z.string().min(3),
-    password: zod_1.z.string().min(6),
+const SignupInputProps = zod_1.z.object({
+    username: zod_1.z.string().min(3).max(10),
+    password: zod_1.z.string().min(6).max(20),
 });
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Here the req, res types are inferred from the express.Router() type
     // Means we don't need to import Request and Response from express
-    const ParsedInput = SignupInputProps.safeParse(req.body);
-    if (!ParsedInput.success) {
-        return res.status(400).json({ message: "Invalid input" });
+    const parsedInput = SignupInputProps.safeParse(req.body);
+    if (!parsedInput.success) {
+        return res.status(411).json({ error: parsedInput.error });
     }
-    let username = ParsedInput.data.username;
-    let password = ParsedInput.data.password;
+    const username = parsedInput.data.username;
+    const password = parsedInput.data.password;
     const user = yield db_1.User.findOne({ username });
     if (user) {
         res.status(403).json({ message: "User already exists" });

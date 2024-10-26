@@ -1,7 +1,3 @@
-Here's an extended `README.md` with details about your application's goals, implementations, and key learnings:
-
----
-
 # Todo Application (MERN Stack)
 
 This Todo application is a comprehensive project developed to explore and solidify concepts in the MERN stack, emphasizing security, efficient state management, type safety, and production-ready practices.

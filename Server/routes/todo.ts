@@ -2,20 +2,21 @@ import express from "express";
 import { authenticateJwt } from "../middleware/index";
 import { Todo } from "../db";
 const router = express.Router();
-
-interface CreateTodoInput {
-  title: string;
-  description: string;
-}
+import { CreateTodoInput } from "../types/todo";
 
 // Zod: Input validation library
 router.post("/todos", authenticateJwt, (req, res) => {
-  const inputs: CreateTodoInput = req.body;
+  const inputs = CreateTodoInput.safeParse(req.body);
+
+  if (!inputs.success) {
+    return res.status(400).json({ error: inputs.error });
+  }
+
   const done = false;
   const userId = req.headers["userId"];
   const newTodo = new Todo({
-    title: inputs.title,
-    description: inputs.description,
+    title: inputs.data.title,
+    description: inputs.data.description,
     done,
     userId,
   });

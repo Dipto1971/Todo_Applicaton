@@ -11,24 +11,32 @@ interface Todo {
 }
 type TodoArray = Todo[];
 
-const TodoList = () => {
+// hook to get the todos
+function useTodo() {
   const [todos, setTodos] = useState<TodoArray>([]);
-  // Giving the state a type
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const authStateValue = useRecoilValue(authState);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTodos = async () => {
       const response = await fetch("http://localhost:3000/todo/todos", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
-      // Todo: Create a type for the response that you get back from the server
       const data: Todo[] = await response.json();
       setTodos(data);
+      setLoading(false);
     };
     getTodos();
-  }, [authStateValue.token]);
+  }, []);
+
+  return { todos: todos, setTodos, loading };
+}
+
+const TodoList = () => {
+  // Giving the state a type
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const authStateValue = useRecoilValue(authState);
+  const { todos, setTodos, loading } = useTodo();
 
   const addTodo = async () => {
     const response = await fetch("http://localhost:3000/todo/todos", {

@@ -18,15 +18,11 @@ const middleware_1 = require("../middleware");
 const middleware_2 = require("../middleware");
 const db_1 = require("../db");
 const router = express_1.default.Router();
-const zod_1 = require("zod");
-const SignupInputProps = zod_1.z.object({
-    username: zod_1.z.string().min(3).max(40),
-    password: zod_1.z.string().min(6).max(20),
-});
+const auth_1 = require("../types/auth");
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Here the req, res types are inferred from the express.Router() type
     // Means we don't need to import Request and Response from express
-    const parsedInput = SignupInputProps.safeParse(req.body);
+    const parsedInput = auth_1.SignupInputProps.safeParse(req.body);
     if (!parsedInput.success) {
         return res.status(411).json({ error: parsedInput.error });
     }
@@ -44,7 +40,12 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 }));
 router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, password } = req.body;
+    const parsedInput = auth_1.LoginInputProps.safeParse(req.body);
+    if (!parsedInput.success) {
+        return res.status(411).json({ error: parsedInput.error });
+    }
+    const username = parsedInput.data.username;
+    const password = parsedInput.data.password;
     const user = yield db_1.User.findOne({ username, password });
     if (user) {
         const token = jsonwebtoken_1.default.sign({ id: user._id }, middleware_2.SECRET, { expiresIn: "1h" });

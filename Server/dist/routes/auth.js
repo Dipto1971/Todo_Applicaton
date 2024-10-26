@@ -20,7 +20,7 @@ const db_1 = require("../db");
 const router = express_1.default.Router();
 const zod_1 = require("zod");
 const SignupInputProps = zod_1.z.object({
-    username: zod_1.z.string().min(3).max(10),
+    username: zod_1.z.string().min(3).max(40),
     password: zod_1.z.string().min(6).max(20),
 });
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

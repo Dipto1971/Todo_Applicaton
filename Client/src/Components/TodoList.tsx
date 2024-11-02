@@ -13,6 +13,8 @@ type TodoArray = Todo[];
 
 // hook to get the todos
 function useTodo() {
+  // Custom hooks are used to return state variables and functions
+  // State variables cannot be directly returned from a hook
   const [todos, setTodos] = useState<TodoArray>([]);
   const [loading, setLoading] = useState(true);
 

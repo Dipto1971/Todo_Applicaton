@@ -4,14 +4,16 @@ import { authenticateJwt } from "../middleware";
 import { SECRET } from "../middleware";
 import { User } from "../db";
 const router = express.Router();
-import { SignupInputProps, LoginInputProps } from "../types/auth";
+import { SignupInputProps, LoginInputProps } from "../../Common/types/auth";
 
 router.post("/signup", async (req, res) => {
   // Here the req, res types are inferred from the express.Router() type
   // Means we don't need to import Request and Response from express
   const parsedInput = SignupInputProps.safeParse(req.body);
   if (!parsedInput.success) {
-    return res.status(411).json({ error: parsedInput.error });
+    return res.status(411).json({
+      error: parsedInput.error.issues.map((issue: any) => issue.message),
+    });
   }
   const username = parsedInput.data.username;
   const password = parsedInput.data.password;

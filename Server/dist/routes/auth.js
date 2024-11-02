@@ -24,7 +24,9 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
     // Means we don't need to import Request and Response from express
     const parsedInput = auth_1.SignupInputProps.safeParse(req.body);
     if (!parsedInput.success) {
-        return res.status(411).json({ error: parsedInput.error });
+        return res.status(411).json({
+            error: parsedInput.error.issues.map((issue) => issue.message.toString()),
+        });
     }
     const username = parsedInput.data.username;
     const password = parsedInput.data.password;
